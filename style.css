@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  background-color: #292D34;
+  color: #B2B8C1;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.col {
+  height: 100%;
+  width: 100px;
+  display: inline-block;
+}
+
+.header {
+  /* background-color: #21252B; */
+  background-color: #202125;
+  box-shadow: 0px 0px 5px 1.5px rgba(0,0,0, 0.35);
+  width: 100%;
+  max-height: 13%;
+  min-height: 13%;
+}
+
+#left {
+  position: fixed;
+  display: none;
+  top: 0;
+  /* background-color: #21252B; */
+  background-color: #202125;
+  float: left;
+  box-shadow: 0px 0px 5px 1.5px rgba(0,0,0, 0.35);
+}
+
+#left .header {
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0, 0);
+  display: flex;
+  justify-content: space-around;
+}
+
+#left .header h1 {
+  color: #82A8E7;
+  align-self: center;
+  font-size: 37px;
+  font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+.contacts {
+  height: 50px;
+  width: 100%;
+  /* background-color: lightblue; */
+  display: flex;
+  transition: 0.2s;
+}
+
+.contacts img {
+  height: 70%;
+  border-radius: 100%;
+  object-fit: cover;
+  margin: 0px 5px 0px 12px;
+  align-self: center;
+}
+
+#comp {
+  background-color: #82A8E7;
+  color: #202125;
+}
+
+.contacts p {
+  align-self: center;
+}
+
+.contacts:hover {
+  background-color: #3C4043;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#right {
+  /* background-color: #292D34; */
+  background-color: #202125;
+  float: right;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#right .header {
+  align-self: flex-start;
+  flex-direction: row;
+  display: flex;
+}
+
+#profName, #availability, #availableText {
+  align-self: center;
+}
+
+#profName {
+  font-size: 34px;
+  margin: 0px 2% 0px 4%;
+}
+
+#availability {
+  background-color: #5F6267;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin-right: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+#texts {
+  /* height: 70%; */
+  flex-grow: 1;
+  width: 90%;
+  margin-bottom: 10px;
+  align-self: center;
+  overflow: auto;
+  padding-top: 10px;
+  /* background-color: lightblue; */
+}
+
+.user, .comp {
+  max-width: 230px;
+  min-height: 20px;
+  overflow: visible;
+  border-radius: 10px;
+  vertical-align: center;
+  padding: 10px;
+  color: #21252B;
+  clear: both;
+  margin: 0px 5px 10px 5px;
+}
+
+.user{
+  float: right;
+  /* background-color: #61AFEF; */
+  /* background-color: #1967D3; */
+  background-color: #82A8E7;
+}
+
+.comp {
+  float: left;
+  /* background-color: #C5CBD6; */
+  background-color: #3C4043;
+  color: #F6F6F6;
+}
+
+#msg, #send {
+  align-self: flex-end;
+  margin: 0px 0px 30px;
+  /* height: 60px; */
+  /* for some reason the height was changing but the text below fixes it */
+  max-height: 60px;
+  min-height: 60px;
+}
+
+#msg {
+  box-sizing: border-box;
+  /* background-color: #8A8F96; */
+  background-color: #5F6267;
+  width: 90%;
+  border-radius: 30px;
+  resize: none;
+  padding: 20px;
+  font-size: 14px;
+  outline: none;
+  border: 0px;
+  align-self: center;
+}
+
+#black{
+  display: none;
+  background-color: black;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+#popShadow {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+#popup {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  vertical-align: center;
+  justify-content: space-evenly;
+  height: 50vh;
+  width: 50vw;
+  border-radius: 15px;
+  background-color: #202125;
+}
+
+#popup #firstLine{
+  font-weight: bold;
+  font-size: 25px;
+}
+
+#popup p, #goTo {
+  margin: 0px 20px;
+  align-self: center;
+  text-align: center;
+}
+
+#goTo {
+  width: 60%;
+  height: 10%;
+  border-radius: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#goTo:hover {
+  cursor: pointer;
+  background-color: #5F6267;
+  transition: 0.3s;
+}
+
+.lineGroup {
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+  margin: 20px 0px;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #F6F6F6;
+  align-self: center;
+  margin: 0px 10px;
+}
+
+#call {
+  visibility: hidden;
+  position: absolute;
+  border-radius: 15px;
+  top: 50px;
+  right: 75px;
+  width: 200px;
+  height: 230px;
+  padding: 10px 0px;
+  background-color: #F6F6F6;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#call img {
+  width: 75%;
+  border-radius: 100%;
+  object-fit: cover;
+  align-self: center;
+}
+
+#call i {
+  align-self: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  background-color: green;
+}
+
+#call i:last-child{
+  background-color: red;
+}
+
+#call i:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 800px){
+  #left {
+    width: 25vw;
+    display: block;
+  }
+
+  #right {
+    width: 75vw;
+  }
+
+  #goTo {
+    width: 40%;
+  }
+}
