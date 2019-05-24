@@ -213,5 +213,5 @@ function time(item){
   // } else {
   //   return 2000;
   // }
-  return 0;
+  return 2000;
 }
