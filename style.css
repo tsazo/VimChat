@@ -84,6 +84,11 @@ body {
   color: #202125;
 }
 
+#comp #cannotSend {
+  background-color: transparent;
+  color: #d80303;
+}
+
 .contacts p {
   align-self: center;
 }
@@ -234,6 +239,7 @@ body {
   width: 60%;
   height: 10%;
   border-radius: 15px;
+  border: 0px;
   outline: none;
   transition: 0.3s;
 }
