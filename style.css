@@ -15,12 +15,14 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+/* Style of columns - left and right */
 .col {
   height: 100%;
   width: 100px;
   display: inline-block;
 }
 
+/* Style of header within each column */
 .header {
   /* background-color: #21252B; */
   background-color: #202125;
@@ -30,6 +32,7 @@ body {
   min-height: 13%;
 }
 
+/* Left column */
 #left {
   position: fixed;
   display: none;
@@ -40,12 +43,14 @@ body {
   box-shadow: 0px 0px 5px 1.5px rgba(0,0,0, 0.35);
 }
 
+/* Left column header */
 #left .header {
   box-shadow: 0px 0px 0px 0px rgba(0,0,0, 0);
   display: flex;
   justify-content: space-around;
 }
 
+/* Left column header text */
 #left .header h1 {
   color: #82A8E7;
   align-self: center;
@@ -53,16 +58,20 @@ body {
   font-family: 'Montserrat Subrayada', sans-serif;
 }
 
+/* Scrollbars on the page */
+/* :: is a pseudo-element --> some aspect of an element */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
+/* Contacts area */
 #contactContainer {
   height: 87%;
   overflow: scroll;
 }
 
+/* Individual contacts */
 .contacts {
   height: 50px;
   width: 100%;
@@ -71,6 +80,7 @@ body {
   transition: 0.2s;
 }
 
+/* Images within contacts */
 .contacts img {
   height: 70%;
   border-radius: 100%;
@@ -79,26 +89,25 @@ body {
   align-self: center;
 }
 
+/* Computer contact */
 #comp {
   background-color: #82A8E7;
   color: #202125;
 }
 
-#comp #cannotSend {
-  background-color: transparent;
-  color: #d80303;
-}
-
+/* Contacts' names */
 .contacts p {
   align-self: center;
 }
 
+/* Contacts while hovered over */
 .contacts:hover {
   background-color: #3C4043;
   cursor: pointer;
   transition: 0.2s;
 }
 
+/* Right column */
 #right {
   /* background-color: #292D34; */
   background-color: #202125;
@@ -110,21 +119,25 @@ body {
   overflow: hidden;
 }
 
+/* Right column header */
 #right .header {
   align-self: flex-start;
   flex-direction: row;
   display: flex;
 }
 
+/* Alignment */
 #profName, #availability, #availableText {
   align-self: center;
 }
 
+/* Profile name in right header */
 #profName {
   font-size: 34px;
   margin: 0px 2% 0px 4%;
 }
 
+/* Availability icon */
 #availability {
   background-color: #5F6267;
   width: 10px;
@@ -133,6 +146,7 @@ body {
   margin-right: 5px;
 }
 
+/* Text container */
 #texts {
   /* height: 70%; */
   flex-grow: 1;
@@ -144,6 +158,7 @@ body {
   /* background-color: lightblue; */
 }
 
+/* Comp and User texts */
 .user, .comp {
   max-width: 230px;
   min-height: 20px;
@@ -156,6 +171,7 @@ body {
   margin: 0px 5px 10px 5px;
 }
 
+/* User texts */
 .user{
   float: right;
   /* background-color: #61AFEF; */
@@ -163,11 +179,18 @@ body {
   background-color: #82A8E7;
 }
 
+/* Comp texts */
 .comp {
   float: left;
   /* background-color: #C5CBD6; */
   background-color: #3C4043;
   color: #F6F6F6;
+}
+
+/* Cannot send text */
+#cannotSend {
+  background-color: transparent;
+  color: #d80303;
 }
 
 #msg, #send {
@@ -253,7 +276,7 @@ body {
 .lineGroup {
   width: 100%;
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
   margin: 20px 0px;
 }
 
@@ -306,6 +329,7 @@ body {
   cursor: pointer;
 }
 
+/* For interative styling */
 @media only screen and (min-width: 800px){
   #left {
     width: 25vw;

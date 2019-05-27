@@ -15,13 +15,14 @@ var userTurn = false; // Checks who is starting conversation
 var compGone = false; // Checks for the final end condition
 var clicked = false; // Checks if button to
 
+// On load the page will show a pop up
 $('document').ready(function(){
   $('#popShadow').hide(0);
   $('#popup').find('b').html(getDate(day));
   $('#popShadow').fadeIn(1000);
 });
 
-// works
+// Hides pop up on button click and initializes the next 'scene' given certain parameters
 $('#goTo').on('click', function(){
   // horizontal line
   if (!clicked){
@@ -48,15 +49,90 @@ $('#goTo').on('click', function(){
   }
 });
 
+// Sets the date of the 'scene'
 function getDate(day){
   var dates = ['May 23, 2019', 'May 24, 2019','May 27, 2019','June 3, 2019','June 20, 2019','July 1, 2019','August 19, 2020'];
 
   return dates[day];
 }
 
-// works
+// Runs when user presses any key down [Note: runs BEFORE oninput event listener]
+// Each part of the function is described below
+$('#msg').on('keypress', function(k){
+  // If the textarea has this attribute, and the computer is done printing out all the strings in the comp array, remove the attribute and set done to false
+  if($('#msg').attr('readonly') && done){
+    document.getElementById('msg').removeAttribute('readonly');
+    done = false;
+  }
+
+  // Runs if the str is the string in the array the user needs to type, else do nothing and exit function
+  if(str == user[indexOfArray][indexOfString]){
+    var code = k.keyCode;
+    // var code = (k.keyCode ? k.keyCode : k.which);
+    // Code of 'Enter key'
+    if (code == 13) {
+      // Set string to blank string
+      str = '';
+
+      // If the index of the user array reaches this index, have this message appended to texts div
+      if(indexOfArray == 199){
+        $('#texts').append('<div class="comp" id="cannotSend"><i>Any messages sent will not be received as the person you are trying to contact is currently offline.</i></div>');
+        $('#texts').animate({scrollTop: $('#texts').prop('scrollHeight')}, 300);
+      }
+
+      // Insert the user's message in texts div
+      insert();
+      // Set the request to keep the textarea empty --> to communicate with oninput function defined below
+      makeEmpty = true;
+      // Sets textarea text to nothing
+      this.value = this.value.replace(/\n/g,'');
+      this.value = '';
+      // Resets indexOfLetter and moves on to next string in array
+      indexOfString ++;
+      indexOfLetter = 0;
+
+      // Runs if the index of string the exceeds the length of the array of strings, else the user can type again
+      if (indexOfString >= user[indexOfArray].length){
+        // Disables user from typing
+        this.setAttribute('readonly', 'readonly');
+        // Sets index of string in given array to 0
+        indexOfString = 0;
+        // Moves on to next set of strings for user to type out
+        indexOfArray ++;
+
+        // Checks indexes of arrays to run different scenarios
+        if(user[indexOfArray] != undefined && user[indexOfArray].length == 0 && comp[compWord].length == 0){
+          // Function that chages 'scenes' at end of conversation
+          endOfDay();
+        } else if(!compGone){
+          // Computer response to user
+          isArrayMore();
+        } else {
+          // If computer is gone, allow user to type again
+          document.getElementById('msg').removeAttribute('readonly');
+
+          // alert('Your message will not be received as the person you are trying to reach is currently offline.');
+
+          // super end condition --> only runs at the very end of code
+          // Blacks out screen
+          if (indexOfArray >= user.length){
+            this.setAttribute('readonly', 'readonly');
+            setTimeout(function(){
+              $('#black').fadeIn(2000);
+            },2000);
+          }
+        }
+      }
+    }
+  }
+});
+
+// Displays desired string rather than actual key being pressed
+// [Note: Runs after onkeypress event handler]
 $('#msg').on('input', function(){
+  // Runs if the textarea doesn't need to be emptied, else the textarea is emptied
   if(!makeEmpty){
+    // Sets the value of textarea to be the str if the string is already fully built, else the string is built further
     if(str == user[indexOfArray][indexOfString]){
       this.value = str;
     } else {
@@ -70,60 +146,7 @@ $('#msg').on('input', function(){
   }
 });
 
-
-// HAS BEEN MODIFIED WITHOUT TESTING
-$('#msg').on('keypress', function(k){
-  if($('#msg').attr('readonly') && done){
-    document.getElementById('msg').removeAttribute('readonly');
-    done = false;
-  }
-
-  if(str == user[indexOfArray][indexOfString]){
-    var code = (k.keyCode ? k.keyCode : k.which);
-    if (code == 13) {
-
-      str = '';
-
-      if(indexOfArray == 199){
-        $('#texts').append('<div class="comp" id="cannotSend" style="background-color: transparent; color:#d80303;"><i>Any messages sent will not be received as the person you are trying to contact is currently offline.</i></div>');
-        $('#texts').animate({scrollTop: $('#texts').prop('scrollHeight')}, 300);
-      }
-
-      insert();
-      makeEmpty = true;
-      this.value = this.value.replace(/\n/g,'');
-      this.value = '';
-      indexOfString ++;
-      indexOfLetter = 0;
-
-      if (indexOfString >= user[indexOfArray].length){
-        this.setAttribute('readonly', 'readonly');
-        indexOfString = 0;
-        indexOfArray ++;
-
-        if(user[indexOfArray] != undefined && user[indexOfArray].length == 0 && comp[compWord].length == 0){
-          endOfDay();
-        } else if(!compGone){
-          isArrayMore();
-        } else {
-
-          //this or other else statement
-          document.getElementById('msg').removeAttribute('readonly');
-
-          // alert('Your message will not be received as the person you are trying to reach is currently offline.');
-          // super end condition --> only runs at the very end of code
-          if (indexOfArray >= user.length){
-            this.setAttribute('readonly', 'readonly');
-            setTimeout(function(){
-              $('#black').fadeIn(2000);
-            },2000);
-          }
-        }
-      }
-    }
-  }
-});
-
+// Builds desired string
 function buildString(){
   if (indexOfLetter >= user[indexOfArray][indexOfString].length || indexOfString >= user[indexOfArray].length){
     return str;
@@ -133,11 +156,13 @@ function buildString(){
   }
 }
 
+// Appends user's message into texts div
 function insert(){
   $('#texts').append('<div class="user">' + user[indexOfArray][indexOfString] + "</div>");
   $('#texts').animate({scrollTop: $('#texts').prop('scrollHeight')}, 300);
 }
 
+// Appends comp's message into texts div
 function compResponse(arr){
   $('#texts').append('<div class="comp">' + arr + "</div>");
   $('#texts').animate({scrollTop: $('#texts').prop('scrollHeight')}, 300);
@@ -148,6 +173,7 @@ function compResponse(arr){
   }
 }
 
+// Runs through all strings in comp array at a certain index to append
 function isArrayMore(){
   comp[compWord].forEach(function(e){
     timer += time(e);
@@ -165,6 +191,7 @@ function isArrayMore(){
   }
 }
 
+// Runs to switch 'scenes'
 function endOfDay(){
   if (user[indexOfArray].length == 0 && comp[compWord].length == 0)
   {
@@ -194,6 +221,7 @@ function endOfDay(){
   }
 }
 
+// Runs to open up next 'scene'
 function restart(){
   $('#call').css('visibility','hidden');
   $('#availability').css('background-color', '#5F6267');
@@ -203,9 +231,8 @@ function restart(){
   $('#black').fadeOut(1000);
 }
 
-// timer dependent on string size
+// Timer dependent on string size
 function time(item){
-  console.log(item.length);
   // if(item.length>13){
   //   return item.length*125;
   // } else if(item.length>5){
@@ -213,5 +240,10 @@ function time(item){
   // } else {
   //   return 2000;
   // }
-  return 2000;
+
+  if (item.length > 20) {
+    return 3000;
+  } else {
+    return 2000;
+  }
 }
